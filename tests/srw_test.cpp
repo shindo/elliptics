@@ -190,7 +190,7 @@ static void timeout_test(session &sess, const std::string &app_name)
 		int timeout = rand() % 20 + 1;
 		sess.set_timeout(timeout);
 
-		results.emplace_back(std::make_pair(timeout, std::move(sess.exec(&id, app_name + "@noreply", data))));
+		results.emplace_back(timeout, sess.exec(&id, app_name + "@noreply", data));
 	}
 
 	/*
