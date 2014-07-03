@@ -190,7 +190,7 @@ static void timeout_test(session &sess, const std::string &app_name)
 		int timeout = rand() % 20 + 1;
 		sess.set_timeout(timeout);
 
-		results.emplace_back(std::make_pair(timeout, sess.exec(&id, app_name + "@noreply", data)));
+		results.emplace_back(std::make_pair(timeout, std::move(sess.exec(&id, app_name + "@noreply", data))));
 	}
 
 	/*
@@ -236,7 +236,7 @@ static void timeout_test(session &sess, const std::string &app_name)
 		auto diff = elapsed.tsec - it->first;
 
 		// 2 is a magic number of seconds, I tried to highlight it in the test description
-		long max_diff = 2;
+		unsigned long max_diff = 2;
 
 		if (diff >= max_diff) {
 			printf("elapsed: %lld.%lld, timeout: %d, diff: %ld, must be less than %ld, error: %s [%d]\n", 
