@@ -180,8 +180,7 @@ static void timeout_test(session &sess, const std::string &app_name)
 	// just a number of test transactions
 	int num = 50;
 
-	std::vector<std::pair<int, async_exec_result>> results;
-	results.reserve(num);
+	std::list<std::pair<int, async_exec_result>> results;
 
 	sess.set_exceptions_policy(session::no_exceptions);
 
