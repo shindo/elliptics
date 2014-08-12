@@ -1143,6 +1143,7 @@ int dnet_process_cmd_raw(struct dnet_net_state *st, struct dnet_cmd *cmd, void *
 	HANDY_TIMER_SCOPE(recursive ? "io_pool.process_raw.recursive" : "io_pool.process_raw", dnet_get_id());
 
 	if (n->monitor) {
+/*
 		if (!react_is_active()) {
 			err = react_activate(st->n->react_aggregator);
 
@@ -1152,6 +1153,7 @@ int dnet_process_cmd_raw(struct dnet_net_state *st, struct dnet_cmd *cmd, void *
 				react_was_activated = 1;
 			}
 		}
+*/
 	}
 
 	react_start_action(ACTION_DNET_PROCESS_CMD_RAW);
@@ -1352,9 +1354,11 @@ int dnet_process_cmd_raw(struct dnet_net_state *st, struct dnet_cmd *cmd, void *
 
 	react_stop_action(ACTION_DNET_PROCESS_CMD_RAW);
 
+/*
 	if (react_was_activated) {
 		react_deactivate();
 	}
+*/
 
 	return err;
 }

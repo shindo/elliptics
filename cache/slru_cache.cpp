@@ -687,9 +687,11 @@ void slru_cache_t::sync_after_append(elliptics_unique_lock<std::mutex> &guard, b
 void slru_cache_t::life_check(void) {
 
 	while (!dnet_need_exit(m_node)) {
+/*
 		if (m_node->monitor) {
 			react_activate(m_node->react_aggregator);
 		}
+*/
 		{
 			react_start_action(ACTION_CACHE_LIFECHECK);
 
@@ -795,9 +797,11 @@ void slru_cache_t::life_check(void) {
 			}
 			react_stop_action(ACTION_CACHE_LIFECHECK);
 		}
+/*
 		if (m_node->monitor) {
 			react_deactivate();
 		}
+*/
 		std::this_thread::sleep_for( std::chrono::milliseconds(1000) );
 	}
 
