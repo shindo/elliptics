@@ -26,15 +26,34 @@
 #include "io_stat_provider.hpp"
 #include "react_stat_provider.hpp"
 
+#include <handystats/operation.hpp>
+#include <handystats/configuration.hpp>
+
 namespace ioremap { namespace monitor {
+
+const char handystat_json[] = R"({
+    "handystats": {
+        "timer": {
+           "idle-timeout": 60000
+        },
+        "metrics-dump": {
+            "interval": 750,
+            "to-json": true
+        }
+    }
+ })";
 
 monitor::monitor(struct dnet_config *cfg)
 : m_server(*this, cfg->monitor_port)
 , m_statistics(*this)
-{}
+{
+	HANDY_CONFIGURATION_JSON(handystat_json);
+	HANDY_INIT();
+}
 
 void monitor::stop() {
 	m_server.stop();
+	HANDY_FINALIZE();
 }
 
 void dnet_monitor_add_provider(struct dnet_node *n, stat_provider *provider, const char *name) {

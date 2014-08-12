@@ -35,6 +35,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <handystats/measuring_points.h>
+
 #include "elliptics.h"
 #include "monitor/monitor.h"
 
@@ -1135,6 +1137,10 @@ int dnet_process_cmd_raw(struct dnet_net_state *st, struct dnet_cmd *cmd, void *
 	int handled_in_cache = 0;
 
 	int react_was_activated = 0;
+	char timer_name[255];
+	sprintf(timer_name,  "io_pool.process_raw.%s%s", dnet_cmd_string(cmd->cmd), recursive ? ".recursive" : "");
+
+	HANDY_TIMER_SCOPE(recursive ? "io_pool.process_raw.recursive" : "io_pool.process_raw", dnet_get_id());
 
 	if (n->monitor) {
 		if (!react_is_active()) {
@@ -1228,6 +1234,7 @@ int dnet_process_cmd_raw(struct dnet_net_state *st, struct dnet_cmd *cmd, void *
 		case DNET_CMD_READ:
 		case DNET_CMD_WRITE:
 		case DNET_CMD_DEL:
+			HANDY_TIMER_START(timer_name, dnet_get_id());
 			if (n->ro && ((cmd->cmd == DNET_CMD_DEL) || (cmd->cmd == DNET_CMD_WRITE))) {
 				err = -EROFS;
 				break;
@@ -1296,6 +1303,7 @@ int dnet_process_cmd_raw(struct dnet_net_state *st, struct dnet_cmd *cmd, void *
 			}
 			break;
 	}
+	HANDY_TIMER_STOP(timer_name, dnet_get_id());
 
 	dnet_stat_inc(st->stat, cmd->cmd, err);
 	if (st->__join_state == DNET_JOIN)

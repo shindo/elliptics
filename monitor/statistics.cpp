@@ -25,6 +25,8 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 
+#include <handystats/json_dump.hpp>
+
 namespace ioremap { namespace monitor {
 
 statistics::statistics(monitor& mon)
@@ -156,6 +158,15 @@ std::string statistics::report(int category) {
 	if (category == DNET_MONITOR_ALL || category == DNET_MONITOR_IO_HISTOGRAMS) {
 		rapidjson::Value histogram_value(rapidjson::kObjectType);
 		report.AddMember("histogram", histogram_report(histogram_value, allocator), allocator);
+	}
+
+	if (category == DNET_MONITOR_HANDYSTATS) {
+		rapidjson::Document value_doc(&allocator);
+		value_doc.Parse<0>(HANDY_JSON_DUMP()->c_str());
+		report.AddMember("handystats",
+		                 allocator,
+		                 static_cast<rapidjson::Value&>(value_doc),
+		                 allocator);
 	}
 
 	std::unique_lock<std::mutex> guard(m_provider_mutex);

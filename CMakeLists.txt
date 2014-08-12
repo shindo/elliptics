@@ -97,6 +97,11 @@ locate_library(REACT "react/react.hpp" "react")
 include_directories(${REACT_INCLUDE_DIRS})
 link_directories(${REACT_LIBRARY_DIRS})
 
+# Find handystats
+locate_library(HANDYSTATS "handystats/operation.hpp" "handystats")
+include_directories(${HANDYSTATS_INCLUDE_DIRS})
+link_directories(${HANDYSTATS_LIBRARY_DIRS})
+
 option(WITH_DOXYGEN "Generate documentation by Doxygen" ON)
 
 if(WITH_DOXYGEN)

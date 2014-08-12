@@ -29,6 +29,8 @@
 #include "monitor/rapidjson/writer.h"
 #include "monitor/rapidjson/stringbuffer.h"
 
+#include <handystats/measuring_points.hpp>
+
 namespace ioremap { namespace cache {
 
 class cache_stat_provider : public ioremap::monitor::stat_provider {
@@ -218,6 +220,9 @@ int dnet_cmd_cache_io(struct dnet_net_state *st, struct dnet_cmd *cmd, struct dn
 
 	cache_manager *cache = (cache_manager *)n->cache;
 	std::shared_ptr<raw_data_t> d;
+	char timer_name[255];
+	sprintf(timer_name, "cache.%s", dnet_cmd_string(cmd->cmd));
+	HANDY_TIMER_SCOPE(timer_name, dnet_get_id());
 
 	try {
 		switch (cmd->cmd) {

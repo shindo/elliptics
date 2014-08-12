@@ -60,7 +60,8 @@ const std::map<std::string, int> handlers = {{"/list", DNET_MONITOR_LIST},
 	{"/commands", DNET_MONITOR_COMMANDS},
 	{"/io_histograms", DNET_MONITOR_IO_HISTOGRAMS},
 	{"/backend", DNET_MONITOR_BACKEND},
-	{"/call_tree", DNET_MONITOR_CALL_TREE}};
+	{"/call_tree", DNET_MONITOR_CALL_TREE},
+	{"/handystats", DNET_MONITOR_HANDYSTATS}};
 
 /*!
  * Generates HTTP response for @req category with @content
