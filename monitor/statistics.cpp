@@ -40,6 +40,7 @@ statistics::statistics(monitor& mon)
 
 void statistics::command_counter(int cmd, const int trans, const int err, const int cache,
                      const uint32_t size, const unsigned long time) {
+/*
 	if (cmd >= __DNET_CMD_MAX || cmd <= 0)
 		cmd = DNET_CMD_UNKNOWN;
 
@@ -117,6 +118,7 @@ void statistics::command_counter(int cmd, const int trans, const int err, const 
 		else
 			hist->disk_internal.update(time, size);
 	}
+*/
 }
 
 void statistics::add_provider(stat_provider *stat, const std::string &name) {
