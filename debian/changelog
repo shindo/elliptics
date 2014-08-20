@@ -1,3 +1,13 @@
+elliptics (2.25.6.10+handystats.0) unstable; urgency=low
+
+  * rapidjson: correctly handle nan values.
+  * rapidjson: correctly handle small double values.
+  * handystats statistics added.
+  * react was disabled.
+  * command statistics disabled.
+
+ -- Danil Osherov <shindo@yandex-team.ru>  Wed, 20 Aug 2014 19:07:42 +0400
+
 elliptics (2.25.6.10) unstable; urgency=low
 
   * client: Don't request route-list from every node
