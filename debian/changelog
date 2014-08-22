@@ -1,3 +1,10 @@
+elliptics (2.25.6.10+handystats.1) unstable; urgency=low
+
+  * С++: fixed garbage at id.trace_id.
+  * debian/control: dependency on handystats package (>= 1.7.0) added.
+
+ -- Danil Osherov <shindo@yandex-team.ru>  Fri, 22 Aug 2014 14:23:55 +0400
+
 elliptics (2.25.6.10+handystats.0) unstable; urgency=low
 
   * rapidjson: correctly handle nan values.
