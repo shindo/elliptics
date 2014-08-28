@@ -196,7 +196,7 @@ using namespace ioremap::cache;
 
 int dnet_cmd_cache_io(struct dnet_backend_io *backend, struct dnet_net_state *st, struct dnet_cmd *cmd, struct dnet_io_attr *io, char *data)
 {
-	react::action_guard cache_guard(ACTION_CACHE);
+	// HANDY_TIMER_SCOPE("cache");
 
 	struct dnet_node *n = st->n;
 	int err = -ENOTSUP;
@@ -210,6 +210,7 @@ int dnet_cmd_cache_io(struct dnet_backend_io *backend, struct dnet_net_state *st
 
 	cache_manager *cache = (cache_manager *)backend->cache;
 	std::shared_ptr<raw_data_t> d;
+
 	char timer_name[255];
 	sprintf(timer_name, "cache.%s", dnet_cmd_string(cmd->cmd));
 	HANDY_TIMER_SCOPE(timer_name, dnet_get_id());
@@ -277,7 +278,7 @@ int dnet_cmd_cache_io(struct dnet_backend_io *backend, struct dnet_net_state *st
 
 int dnet_cmd_cache_lookup(struct dnet_backend_io *backend, struct dnet_net_state *st, struct dnet_cmd *cmd)
 {
-	react::action_guard cache_guard(ACTION_CACHE);
+	// HANDY_TIMER_SCOPE("cache.LOOKUP");
 
 	struct dnet_node *n = st->n;
 	int err = -ENOTSUP;

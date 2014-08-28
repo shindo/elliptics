@@ -1,7 +1,8 @@
 #include "route.h"
 #include "elliptics.h"
-#include <react/elliptics_react.hpp>
 #include <elliptics/utils.hpp>
+
+#include "monitor/measure_points.h"
 
 static int dnet_cmd_reverse_lookup(struct dnet_net_state *st, struct dnet_cmd *cmd, void *data __unused)
 {
@@ -268,13 +269,13 @@ int dnet_route_list::disable_backend(size_t backend_id)
 
 int dnet_route_list::on_reverse_lookup(dnet_net_state *st, dnet_cmd *cmd, void *data)
 {
-	react::action_guard action_guard(ACTION_DNET_CMD_REVERSE_LOOKUP);
+	HANDY_TIMER_SCOPE("route_list.reverse_lookup");
 	return dnet_cmd_reverse_lookup(st, cmd, data);
 }
 
 int dnet_route_list::on_join(dnet_net_state *st, dnet_cmd *cmd, void *data)
 {
-	react::action_guard action_guard(ACTION_DNET_CMD_JOIN_CLIENT);
+	HANDY_TIMER_SCOPE("route_list.join");
 	return dnet_cmd_join_client(st, cmd, data);
 }
 
