@@ -31,7 +31,7 @@ XS-Python-Version: >= 2.6
 
 Package: elliptics
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, eblob (>= 0.22.4), elliptics-client (= ${Source-Version}), libcocaine-core2
+Depends: ${shlibs:Depends}, ${misc:Depends}, eblob (>= 0.22.4), elliptics-client (= ${Source-Version}), libcocaine-core2, handystats (>= 1.8)
 Replaces: elliptics-2.10, srw
 Provides: elliptics-2.10
 Description: Distributed hash table storage
@@ -39,7 +39,7 @@ Description: Distributed hash table storage
 
 Package: elliptics-client
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, msgpack-python | python-msgpack
+Depends: ${shlibs:Depends}, ${misc:Depends}, msgpack-python | python-msgpack, handystats (>= 1.8)
 Replaces: elliptics-2.10
 Description: Distributed hash table storage (client library)
  Elliptics network is a fault tolerant distributed hash table object storage.
