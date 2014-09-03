@@ -1,3 +1,9 @@
+elliptics (2.26.3.19+handystats.1) unstable; urgency=low
+
+  * completely remove react.
+
+ -- Danil Osherov <shindo@yandex-team.ru>  Wed, 03 Sep 2014 15:25:48 +0400
+
 elliptics (2.26.3.19+handystats.0) unstable; urgency=low
 
   * rapidjson: correctly handle NaN values, small double values
