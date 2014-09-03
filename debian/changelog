@@ -1,3 +1,14 @@
+elliptics (2.26.3.19+handystats.0) unstable; urgency=low
+
+  * rapidjson: correctly handle NaN values, small double values
+  * srw: removed dumping @info result to the log
+  * monitor: using handystats library to gather runtime statistics
+  * debian: build dependency on handystats >= 1.8
+  * monitor: complete replacement of react
+  * debian/control: handystats (>= 1.8) added to dependencies of elliptics, elliptics-client packages.
+
+ -- Danil Osherov <shindo@yandex-team.ru>  Wed, 03 Sep 2014 15:16:48 +0400
+
 elliptics (2.26.3.19) unstable; urgency=low
 
   * Pytest: added checking requesting all categories.
