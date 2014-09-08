@@ -1,3 +1,9 @@
+elliptics (2.26.3.19+handystats.3) unstable; urgency=low
+
+  * debian/control: dependency on handystats package updated (>= 1.8.1).
+
+ -- Danil Osherov <shindo@yandex-team.ru>  Mon, 08 Sep 2014 19:07:54 +0400
+
 elliptics (2.26.3.19+handystats.2) unstable; urgency=low
 
   * completely remove react.
