@@ -31,7 +31,6 @@ io.notify.{add,remove}
 
 io.cmds
     tracks all input commands that processed by this node
-    ("rate" is the most suitable statistic for this, same goes for io.forwards and io.replies)
 
 io.forwards
     tracks all input commands that forwarded to other node
@@ -41,14 +40,12 @@ io.replies
 
 io.input.queue.size
     tracks size of virtual input queue of the node
-    ("rate" or "interval-sum" statistics are suitable to assess command stream rate, same goes for io.output.queue.size)
 
 io.output.queue.size
     tracks instant size of output queue of the node
 
 pool.{sys,<backend id>}.{blocking,nonblocking}.queue.size
     tracks size of a pool's input queue
-    ("rate" or "interval-sum" statistics are suitable to assess command stream rate)
 
 pool.{sys,<backend id>}.{blocking,nonblocking}.queue.wait_time
     time commands spent waiting in a pool's input queue

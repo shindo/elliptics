@@ -24,14 +24,15 @@ Build-Depends:	cdbs,
 		python-pip,
 		python-virtualenv,
 		msgpack-python | python-msgpack,
-		handystats (>= 1.10.2)
+		libhandystats2,
+		libhandystats-dev,
 Standards-Version: 3.8.0
 Homepage: http://www.ioremap.net/projects/elliptics
 XS-Python-Version: >= 2.6
 
 Package: elliptics
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, eblob (>= 0.22.4), elliptics-client (= ${Source-Version}), libcocaine-core2, handystats (>= 1.10.0)
+Depends: ${shlibs:Depends}, ${misc:Depends}, eblob (>= 0.22.4), elliptics-client (= ${Source-Version}), libcocaine-core2, libhandystats2,
 Replaces: elliptics-2.10, srw
 Provides: elliptics-2.10
 Description: Distributed hash table storage
@@ -39,7 +40,7 @@ Description: Distributed hash table storage
 
 Package: elliptics-client
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, msgpack-python | python-msgpack, handystats (>= 1.10.0)
+Depends: ${shlibs:Depends}, ${misc:Depends}, msgpack-python | python-msgpack, libhandystats2,
 Replaces: elliptics-2.10
 Description: Distributed hash table storage (client library)
  Elliptics network is a fault tolerant distributed hash table object storage.
@@ -61,6 +62,7 @@ Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, elliptics (= ${Source-Version}) | elliptics-client (= ${Source-Version})
 Replaces: elliptics-dbg-2.10, srw-dbg
 Provides: elliptics-dbg-2.10
+Suggests: libhandystats2-dbg
 Description: Distributed hash table storage (debug files)
  Elliptics network is a fault tolerant distributed hash table object storage.
 

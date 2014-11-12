@@ -1,21 +1,69 @@
 {
-    "statistics": {
-        "moving-interval": 1000,
-        "histogram-bins": 30,
-        "tags": ["moving-avg"]
-    },
+	"enable": true,
+	"dump-interval": 750,
 
-    "metrics": {
-        "counter": {
-            "tags": ["moving-avg", "rate"]
-        },
-        "timer": {
-            "idle-timeout": 60000,
-            "tags": ["moving-avg", "quantile"]
-        }
-    },
+	"defaults": {
+		"moving-interval": 1000,
+		"histogram-bins": 30,
+		"stats": ["moving-avg"]
+	},
 
-    "metrics-dump": {
-        "interval": 1000
-    }
+	"gauge": {
+		"stats": ["moving-avg", "throughput"]
+	},
+
+	"counter": {
+		"stats": ["moving-avg"]
+	},
+
+	"timer": {
+		"idle-timeout": 60000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"io.cmd{,.*.lock_time,.*}": {
+		"moving-interval": 10000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"io.cmd_recursive{,.READ}": {
+		"moving-interval": 10000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"cache.{READ,WRITE,DEL}": {
+		"moving-interval": 10000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"eblob_backend.cmd.{READ,WRITE,LOOKUP,DEL,READ_RANGE,DEL_RANGE}": {
+		"moving-interval": 10000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"io.notify.{update,add,remove}": {
+		"moving-interval": 10000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"io.{cmds,forwards,replies}": {
+		"stats": ["throughput"]
+	},
+
+	"io.{input,output}.queue.size": {
+		"stats": ["moving-avg", "max"]
+	},
+
+	"pool.*.{blocking,nonblocking}.queue.size": {
+		"stats": ["moving-avg", "max"]
+	},
+
+	"pool.*.{blocking,nonblocking}.queue.wait_time": {
+		"moving-interval": 10000,
+		"stats": ["moving-avg", "quantile"]
+	},
+
+	"pool.*.{blocking,nonblocking}.active_threads": {
+		"stats": ["moving-avg"]
+	}
 }

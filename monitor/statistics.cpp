@@ -24,15 +24,9 @@
 #include "elliptics/backends.h"
 #include "monitor/compress.hpp"
 
-//FIXME: elliptics uses rather modified version of rapidjson
-// which is partially incompatible with a stock version used by
-// handystats, so its a necessity to include exactly prettywriter.h,
-// its effectively forces selection of elliptics' version of rapidjson
-// in its entirety.
-#include "rapidjson/prettywriter.h"
-
 #ifdef HAVE_HANDYSTATS
-#include <handystats/json_dump.hpp>
+#include <handystats/metrics_dump.hpp>
+#include <handystats/utils/rapidjson_writer.hpp>
 #endif
 
 namespace ioremap { namespace monitor {
@@ -253,7 +247,7 @@ std::string statistics::report(uint64_t categories)
 	if (categories & DNET_MONITOR_STATS) {
 #if defined(HAVE_HANDYSTATS) && !defined(HANDYSTATS_DISABLE)
 		rapidjson::Value stats_value(rapidjson::kObjectType);
-		handystats::json::fill(stats_value, allocator, *HANDY_METRICS_DUMP());
+		handystats::utils::rapidjson::fill_value(stats_value, *HANDY_METRICS_DUMP(), allocator);
 		report.AddMember("stats", stats_value, allocator);
 #else
 		report.AddMember("__stats__", "stats subsystem disabled at compile time", allocator);

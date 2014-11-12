@@ -647,7 +647,7 @@ int dnet_process_recv(struct dnet_backend_io *backend, struct dnet_net_state *st
 		uint64_t tid = cmd->trans;
 		uint64_t flags = cmd->flags;
 
-		HANDY_COUNTER_INCREMENT("io.replies", 1);
+		HANDY_GAUGE_SET("io.replies", 1);
 
 		pthread_mutex_lock(&st->trans_lock);
 		t = dnet_trans_search(st, tid);
@@ -724,7 +724,7 @@ int dnet_process_recv(struct dnet_backend_io *backend, struct dnet_net_state *st
 	if (!forward_state || forward_state == st || forward_state == n->st) {
 		dnet_state_put(forward_state);
 
-		HANDY_COUNTER_INCREMENT("io.cmds", 1);
+		HANDY_GAUGE_SET("io.cmds", 1);
 		err = dnet_process_cmd_raw(backend, st, cmd, r->data, 0);
 	} else {
 		if (!forward_state) {
@@ -732,7 +732,7 @@ int dnet_process_recv(struct dnet_backend_io *backend, struct dnet_net_state *st
 			goto err_out_put_forward;
 		}
 
-		HANDY_COUNTER_INCREMENT("io.forwards", 1);
+		HANDY_GAUGE_SET("io.forwards", 1);
 		err = dnet_trans_forward(r, st, forward_state);
 		if (err)
 			goto err_out_put_forward;
