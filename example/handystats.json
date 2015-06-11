@@ -1,21 +1,69 @@
 {
-    "statistics": {
+    "enable": true,
+    "dump-interval": 1000,
+
+    "defaults": {
         "moving-interval": 1000,
-        "histogram-bins": 30,
+        "rate-unit": "s",
+        "tags": []
+    },
+    "timer": {
+        "histogram-bins": 30
+    },
+
+    "io.cmd.*.lock_time": {
+        "tags": ["quantile", "moving-avg"]
+    },
+
+    "io.cmd{,.[A-Z]*}": {
+        "tags": ["quantile", "moving-avg", "moving-count"]
+    },
+
+    "io.cmd_recursive{,.[A-Z]*}": {
+        "tags": ["quantile", "moving-avg"]
+    },
+
+    "cache.{READ,WRITE,DEL}": {
+        "tags": ["quantile", "moving-avg"]
+    },
+
+    "eblob_backend.cmd.{READ,WRITE,LOOKUP,DEL,READ_RANGE,DEL_RANGE}": {
+        "tags": ["quantile", "moving-avg"]
+    },
+
+    "io.notify.{update,add,remove}": {
+        "tags": ["quantile", "moving-avg"]
+    },
+
+    "io.{cmds,forwards,replies}": {
+        "tags": ["rate"]
+    },
+
+    "io.{input,output}.queue.size": {
+        "tags": ["rate", "moving-avg"]
+    },
+
+    "pool.*.{blocking,nonblocking}.queue.size": {
+        "tags": ["rate", "moving-avg"]
+    },
+
+    "pool.*.{blocking,nonblocking}.queue.wait_time": {
+        "tags": ["quantile", "moving-avg"]
+    },
+
+    "pool.*.{blocking,nonblocking}.active_threads": {
         "tags": ["moving-avg"]
     },
 
-    "metrics": {
-        "counter": {
-            "tags": ["moving-avg", "rate"]
-        },
-        "timer": {
-            "idle-timeout": 60000,
-            "tags": ["moving-avg", "quantile"]
-        }
+    "eblob.*.{lookup,cache.lookup,disk.{read,write,remove,lookup}}": {
+        "tags": ["quantile", "moving-avg", "moving-count"]
     },
 
-    "metrics-dump": {
-        "interval": 1000
+    "eblob.*.disk.{read,write,remove}.errors.*": {
+        "tags": ["value", "rate", "moving-avg"]
+    },
+
+    "eblob.*.cache.size": {
+        "tags": ["value", "rate", "moving-avg"]
     }
 }
