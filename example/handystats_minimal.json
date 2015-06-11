@@ -1,0 +1,19 @@
+{
+    "enable": true,
+
+    "defaults": {
+        "moving-interval": 1000,
+        "histogram-bins": 30,
+        "tags": ["moving-avg"]
+    },
+
+    "dump-interval": 1000,
+
+    "counter": {
+        "tags": ["moving-avg", "rate"]
+    },
+    "timer": {
+        "idle-timeout": 60000,
+        "tags": ["moving-avg", "quantile"]
+    }
+}
